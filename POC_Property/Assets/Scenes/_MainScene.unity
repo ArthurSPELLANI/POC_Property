@@ -207,6 +207,21 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2123969290}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop2Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 00ea59656111b6d49a2c0619d2f0c75f, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop3Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 04cad1448a237fa4b965adbd45efa5f5, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop4Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 392b04d7c9c54e54ea7e7c296c9a7ba4, type: 2}
     - target: {fileID: 6377098773411719873, guid: 2d2bb0042f6cb8248948a5c148b963f6,
         type: 3}
       propertyPath: m_RootOrder
@@ -554,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsCam: {fileID: 664292883}
-  propertyManager: {fileID: 0}
+  propertyManager: {fileID: 2123969290}
 --- !u!114 &828980530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,6 +838,21 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2123969290}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop2Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 00ea59656111b6d49a2c0619d2f0c75f, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop3Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 04cad1448a237fa4b965adbd45efa5f5, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop4Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 392b04d7c9c54e54ea7e7c296c9a7ba4, type: 2}
     - target: {fileID: 6377098773411719873, guid: 2d2bb0042f6cb8248948a5c148b963f6,
         type: 3}
       propertyPath: m_RootOrder
@@ -996,6 +1026,21 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2123969290}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop2Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 00ea59656111b6d49a2c0619d2f0c75f, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop3Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 04cad1448a237fa4b965adbd45efa5f5, type: 2}
+    - target: {fileID: 1056252456488841165, guid: 2d2bb0042f6cb8248948a5c148b963f6,
+        type: 3}
+      propertyPath: prop4Mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 392b04d7c9c54e54ea7e7c296c9a7ba4, type: 2}
     - target: {fileID: 6377098773411719873, guid: 2d2bb0042f6cb8248948a5c148b963f6,
         type: 3}
       propertyPath: m_RootOrder
