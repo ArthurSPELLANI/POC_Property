@@ -15,60 +15,50 @@ public class PropertyManager : MonoBehaviour
     {
         if(objectsWithProperty[0] != null)
         {
-            ChekIfAlreadyInList(objectToAdd);
+            if (objectToAdd == objectsWithProperty[1])
+            {
+                objectsWithProperty[1] = null;
+            }
             RemoveProperty(objectsWithProperty[0], 1);
             objectsWithProperty[0] = null;
             objectsWithProperty[0] = objectToAdd;
+            objectToAdd.GetComponent<Surface>().Property1();
         }
         else
         {
             objectsWithProperty[0] = objectToAdd;
+            objectToAdd.GetComponent<Surface>().Property1();
+            if (objectToAdd == objectsWithProperty[1])
+            {
+                objectsWithProperty[1] = null;
+            }
         }
     }
     public void AddToProperty2(GameObject objectToAdd)
     {
         if (objectsWithProperty[1] != null)
         {
-            ChekIfAlreadyInList(objectToAdd);
+            if (objectToAdd == objectsWithProperty[0])
+            {
+                objectsWithProperty[0] = null;
+            }
             RemoveProperty(objectsWithProperty[1], 2);
             objectsWithProperty[1] = null;
             objectsWithProperty[1] = objectToAdd;
+            objectToAdd.GetComponent<Surface>().Property2();
         }
         else
         {
             objectsWithProperty[1] = objectToAdd;
-        }
-    }
-    public void AddToProperty3(GameObject objectToAdd)
-    {
-        if (objectsWithProperty[2] != null)
-        {
-            ChekIfAlreadyInList(objectToAdd);
-            RemoveProperty(objectsWithProperty[2], 3);
-            objectsWithProperty[2] = null;
-            objectsWithProperty[2] = objectToAdd;
-        }
-        else
-        {
-            objectsWithProperty[2] = objectToAdd;
-        }
-    }
-    public void AddToProperty4(GameObject objectToAdd)
-    {
-        if (objectsWithProperty[3] != null)
-        {
-            ChekIfAlreadyInList(objectToAdd);
-            RemoveProperty(objectsWithProperty[3], 4);
-            objectsWithProperty[3] = null;
-            objectsWithProperty[3] = objectToAdd;
-        }
-        else
-        {
-            objectsWithProperty[3] = objectToAdd;
+            objectToAdd.GetComponent<Surface>().Property2();
+            if (objectToAdd == objectsWithProperty[0])
+            {
+                objectsWithProperty[0] = null;
+            }
         }
     }
 
-    void ChekIfAlreadyInList(GameObject objectToCheck)
+    /*void ChekIfAlreadyInList(GameObject objectToCheck)
     {
         for (int i = 0; i < objectsWithProperty.Length; i++)
         {
@@ -78,7 +68,7 @@ public class PropertyManager : MonoBehaviour
                 RemoveProperty(objectToCheck, i);
             }
         }
-    }
+    }*/
 
     void RemoveProperty(GameObject objectToClean, int propertyNumber)
     {

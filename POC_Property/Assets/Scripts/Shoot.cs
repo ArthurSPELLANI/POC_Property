@@ -6,9 +6,13 @@ public class Shoot : MonoBehaviour
 {
     public Camera fpsCam;
     public PropertyManager propertyManager;
+    public PlayerMovement move;
+    public GameObject ld;
 
     bool rtInUse = false;
     bool ltInUse = false;
+
+    public bool canTurn = true;
 
     private void Update()
     {
@@ -22,13 +26,13 @@ public class Shoot : MonoBehaviour
             Shoot2();
             ltInUse = true;
         }
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") && canTurn)
         {
-            Shoot3();
+            StartCoroutine(TurnLeft());
         }
-        if (Input.GetButtonDown("Fire4"))
+        if (Input.GetButtonDown("Fire4") && canTurn)
         {
-            Shoot4();
+            StartCoroutine(TurnRight());
         }
 
         if(Input.GetAxisRaw("Fire1") == 0 && rtInUse == true)
@@ -48,7 +52,7 @@ public class Shoot : MonoBehaviour
         {
             if (hit.transform.gameObject.GetComponent<Surface>())
             {
-                hit.transform.gameObject.GetComponent<Surface>().Property1();
+                propertyManager.AddToProperty1(hit.transform.gameObject);
             }
         }
     }
@@ -60,32 +64,51 @@ public class Shoot : MonoBehaviour
         {
             if (hit.transform.gameObject.GetComponent<Surface>())
             {
-                hit.transform.gameObject.GetComponent<Surface>().Property2();
+                propertyManager.AddToProperty2(hit.transform.gameObject);
             }
         }
     }
 
-    void Shoot3()
+    Quaternion previousRot;
+    Vector3 playerVel;
+
+    private IEnumerator TurnLeft()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        canTurn = false;
+        playerVel = GetComponent<Rigidbody>().velocity;
+        move.isTurning = true;
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody>().useGravity = false;
+        previousRot = ld.transform.rotation;
+        for (int i = 0; i < 180; i++)
         {
-            if (hit.transform.gameObject.GetComponent<Surface>())
-            {
-                hit.transform.gameObject.GetComponent<Surface>().Property3();
-            }
+            ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(0.5f, 0, 0);
+            yield return new WaitForSeconds(0.02f);
         }
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<Rigidbody>().useGravity = true;
+        GetComponent<Rigidbody>().velocity = playerVel;
+        move.isTurning = false;
+        canTurn = true;
     }
 
-    void Shoot4()
+    private IEnumerator TurnRight()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        canTurn = false;
+        playerVel = GetComponent<Rigidbody>().velocity;
+        move.isTurning = true;
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody>().useGravity = false;
+        previousRot = ld.transform.rotation;
+        for (int i = 0; i < 180; i++)
         {
-            if (hit.transform.gameObject.GetComponent<Surface>())
-            {
-                hit.transform.gameObject.GetComponent<Surface>().Property4();
-            }
+            ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(-0.5f, 0, 0);
+            yield return new WaitForSeconds(0.02f);
         }
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<Rigidbody>().useGravity = true;
+        GetComponent<Rigidbody>().velocity = playerVel;
+        move.isTurning = false;
+        canTurn = true;
     }
 }

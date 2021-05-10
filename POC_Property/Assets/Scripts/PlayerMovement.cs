@@ -7,11 +7,22 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float movementMultiplier = 10f;
+    public float airMultiplier = 0.004f;
+    public float jumpForce = 5f;
+    public bool grounded;
+    public CapsuleCollider col;
+    public PhysicMaterial defaultMat;
+    public PhysicMaterial stickMat;
 
-    float rbDrag = 6f;
+    float playerHeight = 2f;
+
+    float groundDrag = 6f;
+    float airDrag = 0f;
 
     float horizontalMovement;
     float verticalMovement;
+
+    public bool isTurning = false;
 
     Vector3 moveDirection;
 
@@ -25,13 +36,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        InputHandle();
-        ControlDrag();
+        if (isTurning == false)
+        {
+            InputHandle();
+            ControlDrag();
+
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
+
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                Jump();
+            }
+        }        
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if(isTurning == false)
+        {
+            MovePlayer();
+        }        
     }
 
     void InputHandle()
@@ -44,12 +68,32 @@ public class PlayerMovement : MonoBehaviour
 
     void ControlDrag()
     {
-        rb.drag = rbDrag;
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = airDrag;
+        }
     }
 
     void MovePlayer()
     {
-        rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        if (grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+        }
+        
+    }
+
+    void Jump()
+    {
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
 }
