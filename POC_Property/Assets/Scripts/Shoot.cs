@@ -9,6 +9,8 @@ public class Shoot : MonoBehaviour
     public PlayerMovement move;
     public GameObject ld;
 
+    Vector3 playerPos;
+
     bool rtInUse = false;
     bool ltInUse = false;
 
@@ -16,6 +18,8 @@ public class Shoot : MonoBehaviour
 
     private void Update()
     {
+        playerPos = transform.position;
+
         if (Input.GetAxisRaw("Fire1") != 0 && rtInUse == false)
         {
             Shoot1();
@@ -71,7 +75,7 @@ public class Shoot : MonoBehaviour
 
     Quaternion previousRot;
     Vector3 playerVel;
-
+    
     private IEnumerator TurnLeft()
     {
         canTurn = false;
@@ -82,7 +86,8 @@ public class Shoot : MonoBehaviour
         previousRot = ld.transform.rotation;
         for (int i = 0; i < 180; i++)
         {
-            ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(0.5f, 0, 0);
+            ld.transform.RotateAround(playerPos, ld.transform.right, -0.5f);
+            //ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(0.5f, 0, 0);
             yield return new WaitForSeconds(0.02f);
         }
         yield return new WaitForSeconds(0.2f);
@@ -102,7 +107,8 @@ public class Shoot : MonoBehaviour
         previousRot = ld.transform.rotation;
         for (int i = 0; i < 180; i++)
         {
-            ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(-0.5f, 0, 0);
+            ld.transform.RotateAround(playerPos, ld.transform.right, -0.5f);
+            //ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(-0.5f, 0, 0);
             yield return new WaitForSeconds(0.02f);
         }
         yield return new WaitForSeconds(0.2f);
