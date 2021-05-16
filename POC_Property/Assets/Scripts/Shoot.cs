@@ -107,7 +107,7 @@ public class Shoot : MonoBehaviour
         previousRot = ld.transform.rotation;
         for (int i = 0; i < 180; i++)
         {
-            ld.transform.RotateAround(playerPos, ld.transform.right, -0.5f);
+            ld.transform.RotateAround(playerPos, ld.transform.right, 0.5f);
             //ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(-0.5f, 0, 0);
             yield return new WaitForSeconds(0.02f);
         }

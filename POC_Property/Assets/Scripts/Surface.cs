@@ -8,6 +8,8 @@ public class Surface : MonoBehaviour
     public Material prop1Mat, prop2Mat;
 
     public float bounceLevel = 10;
+    public float pullRadius = 1;
+    public float pullForce = 600;
 
     int hasProperty = 0;
 
@@ -28,6 +30,21 @@ public class Surface : MonoBehaviour
         hasProperty = 0;
     }
 
+    private void FixedUpdate()
+    {
+        if (hasProperty == 2)
+        {
+            foreach (Collider collider in Physics.OverlapSphere(transform.position, pullRadius))
+            {
+                if(collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    Vector3 forceDirection = transform.position - collider.transform.position;
+                    collider.GetComponent<Rigidbody>().AddForce(forceDirection.normalized * pullForce * Time.deltaTime);
+                }                
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -42,7 +59,7 @@ public class Surface : MonoBehaviour
                         Bounce(other.gameObject);
                         break;
                     case 2:
-                        Stick(other.gameObject);
+                        //Stick(other.gameObject);
                         break;
                 }
             }            
@@ -62,7 +79,7 @@ public class Surface : MonoBehaviour
                     case 1:
                         break;
                     case 2:
-                        UnStick(other.gameObject);
+                        //UnStick(other.gameObject);
                         break;
                 }
             }            
@@ -80,12 +97,13 @@ public class Surface : MonoBehaviour
                     switch (hasProperty)
                     {
                         case 0:
-                            other.GetComponent<Rigidbody>().useGravity = true;
+                            //other.GetComponent<PlayerMovement>().AddGravity();
                             break;
                         case 1:
                             Bounce(other.gameObject);
                             break;
                         case 2:
+                            //Stick(other.gameObject);
                             break;
                     }
                 }                
@@ -99,19 +117,26 @@ public class Surface : MonoBehaviour
     {
         playerVel = new Vector3(0,player.GetComponent<Rigidbody>().velocity.y,0);
         player.GetComponent<Rigidbody>().useGravity = true;
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         player.GetComponent<Rigidbody>().AddForce(transform.up * bounceLevel - playerVel * 1.2f, ForceMode.Impulse);
     }
 
     void Stick(GameObject player)
     {
+        player.GetComponent<PlayerMovement>().canGrav = false;
         player.GetComponent<PlayerMovement>().col.material = player.GetComponent<PlayerMovement>().stickMat;
         player.GetComponent<Rigidbody>().useGravity = false;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void UnStick(GameObject player)
     {
+        player.GetComponent<PlayerMovement>().canGrav = true;
         player.GetComponent<PlayerMovement>().col.material = player.GetComponent<PlayerMovement>().defaultMat;
         player.GetComponent<Rigidbody>().useGravity = true;
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 }

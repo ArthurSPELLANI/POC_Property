@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     float verticalMovement;
 
     public bool isTurning = false;
+    public bool canGrav = true;
 
     Vector3 moveDirection;
 
@@ -94,6 +95,25 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    public void CancelGravity()
+    {
+        if(canGrav == true)
+        {
+            rb.useGravity = false;
+        }
+    }
+
+    public void AddGravity()
+    {
+        if(canGrav == false)
+        {
+            rb.useGravity = true;
+            canGrav = true;
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
     }
 
 }
