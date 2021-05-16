@@ -24,7 +24,7 @@ public class Surface : MonoBehaviour
     public void Property2()
     {
         gameObject.GetComponent<MeshRenderer>().material = prop2Mat;
-        activeFX = Instantiate(FX, transform.position, Quaternion.identity);
+        activeFX = Instantiate(FX, transform.position, Quaternion.identity, transform.parent);
         hasProperty = 2;
     }
 

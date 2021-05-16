@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float movementMultiplier = 10f;
-    public float airMultiplier = 0.004f;
+    public float airMultiplier = 0.4f;
     public float jumpForce = 5f;
     public bool grounded;
     public CapsuleCollider col;
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     float playerHeight = 2f;
 
     float groundDrag = 6f;
-    float airDrag = 0f;
+    float airDrag = 1.5f;
 
     float horizontalMovement;
     float verticalMovement;
@@ -83,11 +83,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Force);
         }
         else
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Force);
         }
         
     }
