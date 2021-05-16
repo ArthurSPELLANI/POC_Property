@@ -18,20 +18,23 @@ public class PropertyManager : MonoBehaviour
             if (objectToAdd == objectsWithProperty[1])
             {
                 objectsWithProperty[1] = null;
+                RemoveProperty(objectsWithProperty[1]);
             }
-            RemoveProperty(objectsWithProperty[0], 1);
+            RemoveProperty(objectsWithProperty[0]);
             objectsWithProperty[0] = null;
             objectsWithProperty[0] = objectToAdd;
             objectToAdd.GetComponent<Surface>().Property1();
         }
         else
         {
-            objectsWithProperty[0] = objectToAdd;
-            objectToAdd.GetComponent<Surface>().Property1();
             if (objectToAdd == objectsWithProperty[1])
             {
+                RemoveProperty(objectsWithProperty[1]);
                 objectsWithProperty[1] = null;
             }
+            objectsWithProperty[0] = objectToAdd;
+            objectToAdd.GetComponent<Surface>().Property1();
+            
         }
     }
     public void AddToProperty2(GameObject objectToAdd)
@@ -42,7 +45,7 @@ public class PropertyManager : MonoBehaviour
             {
                 objectsWithProperty[0] = null;
             }
-            RemoveProperty(objectsWithProperty[1], 2);
+            RemoveProperty(objectsWithProperty[1]);
             objectsWithProperty[1] = null;
             objectsWithProperty[1] = objectToAdd;
             objectToAdd.GetComponent<Surface>().Property2();
@@ -70,8 +73,8 @@ public class PropertyManager : MonoBehaviour
         }
     }*/
 
-    void RemoveProperty(GameObject objectToClean, int propertyNumber)
+    void RemoveProperty(GameObject objectToClean)
     {
-        objectToClean.GetComponent<Surface>().RemoveProperty(propertyNumber);
+        objectToClean.GetComponent<Surface>().RemoveProperty();
     }
 }

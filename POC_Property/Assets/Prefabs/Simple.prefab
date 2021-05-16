@@ -234,6 +234,7 @@ MonoBehaviour:
   defaultMat: {fileID: 2100000, guid: dd946f0c7b3c862489909e88ecdc8e0f, type: 2}
   prop1Mat: {fileID: 2100000, guid: 04cad1448a237fa4b965adbd45efa5f5, type: 2}
   prop2Mat: {fileID: 2100000, guid: 392b04d7c9c54e54ea7e7c296c9a7ba4, type: 2}
+  FX: {fileID: 6596887745016344641, guid: 5bdb28f61205e514c92894ac11b4a4ad, type: 3}
   bounceLevel: 10
   pullRadius: 3
   pullForce: 3

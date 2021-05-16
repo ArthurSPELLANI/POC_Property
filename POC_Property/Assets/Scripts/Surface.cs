@@ -7,6 +7,9 @@ public class Surface : MonoBehaviour
     public Material defaultMat;
     public Material prop1Mat, prop2Mat;
 
+    public GameObject FX;
+    GameObject activeFX;
+
     public float bounceLevel = 10;
     public float pullRadius = 1;
     public float pullForce = 600;
@@ -21,12 +24,17 @@ public class Surface : MonoBehaviour
     public void Property2()
     {
         gameObject.GetComponent<MeshRenderer>().material = prop2Mat;
+        activeFX = Instantiate(FX, transform.position, Quaternion.identity);
         hasProperty = 2;
     }
 
-    public void RemoveProperty(int propertyNumber)
+    public void RemoveProperty()
     {
         gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+        if(activeFX != null)
+        {
+            Destroy(activeFX);
+        }
         hasProperty = 0;
     }
 
