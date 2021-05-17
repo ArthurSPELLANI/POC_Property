@@ -88,7 +88,7 @@ public class Shoot : MonoBehaviour
         {
             ld.transform.RotateAround(playerPos, ld.transform.right, -0.5f);
             //ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(0.5f, 0, 0);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.005f);
         }
         yield return new WaitForSeconds(0.2f);
         GetComponent<Rigidbody>().useGravity = true;
@@ -109,7 +109,7 @@ public class Shoot : MonoBehaviour
         {
             ld.transform.RotateAround(playerPos, ld.transform.right, 0.5f);
             //ld.transform.rotation = ld.transform.rotation * Quaternion.Euler(-0.5f, 0, 0);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.005f);
         }
         yield return new WaitForSeconds(0.2f);
         GetComponent<Rigidbody>().useGravity = true;
